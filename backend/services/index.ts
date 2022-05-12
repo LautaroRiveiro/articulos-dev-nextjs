@@ -1,0 +1,1 @@
+export * as articuloService from './articulo.service'
