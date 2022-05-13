@@ -1,5 +1,5 @@
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
-import Head from 'next/head';
+import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
+import Head from 'next/head'
 import { FC, PropsWithChildren } from 'react'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 export const AppLayout: FC<PropsWithChildren<Props>> = ({ title = 'Artículos web', children }) => {
   return (
-    <>
+    <Box sx={{ minHeight: '100vh' }} display='flex' flexDirection='column'>
       <Head>
         <title>{title}</title>
       </Head>
@@ -32,9 +32,9 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ title = 'Artículos we
         </Toolbar>
       </AppBar>
 
-      <main>
+      <Container component='main' sx={{ position: 'relative', flexGrow: 1, mb: 4 }}>
         {children}
-      </main>
-    </>
+      </Container>
+    </Box>
   )
 }

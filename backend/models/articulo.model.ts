@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose"
 
 export interface IArticulo {
+  _id: string;
   descripcion: string;
   enlace: string;
   fechaCreacion: number;
