@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import { AppLayout } from '../layouts'
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <AppLayout>
       Hola mundo
-    </div>
+    </AppLayout>
   )
 }
 
