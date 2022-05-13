@@ -29,3 +29,22 @@ export const getOne = async (id: string):Promise<IArticulo | null> => {
   
   return articulo
 }
+
+export const create = async (data:IArticulo):Promise<IArticulo> => {
+  
+  try {
+    // Aunque le mande un objeto vacío, null o undefined va a crear la instancia con su _id.
+    // El problema lo tendré recién al querer guardar.
+    // (Si mando un req.body vacío, su typeof va a ser un string y va a lanzar error)
+    const articulo = new ArticuloModel(data)
+    articulo.fechaCreacion = Date.now()
+
+    await db.connect()
+    // Si no están todos los campos requeridos o no son válidos lanza error
+    await articulo.save()
+    return articulo
+  } finally {
+    await db.disconnect()
+  }
+  
+}

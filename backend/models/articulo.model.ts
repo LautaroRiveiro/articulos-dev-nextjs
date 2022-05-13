@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Model, Schema } from "mongoose"
 
 export interface IArticulo {
   descripcion: string;
@@ -18,8 +18,9 @@ const schema = new Schema<IArticulo>({
     enum: {
       values: [ 'video', 'articulo', 'otro' ],
       message: '{VALUE} no es un tipo permitido'
-    }
+    },
+    default: 'otro'
   }
 })
 
-export const ArticuloModel = mongoose.models.Articulo || mongoose.model<IArticulo>('Articulo', schema)
+export const ArticuloModel: Model<IArticulo> = mongoose.models.Articulo || mongoose.model<IArticulo>('Articulo', schema)
