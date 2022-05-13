@@ -48,3 +48,32 @@ export const create = async (data:IArticulo):Promise<IArticulo> => {
   }
   
 }
+
+export const edit = async (id:string, data:Partial<IArticulo>):Promise<IArticulo | null> => {
+  
+  try {
+    await db.connect()
+    const articulo = await ArticuloModel.findByIdAndUpdate(id, data, {returnDocument: 'after', lean: true})
+    return articulo
+  } finally {
+    await db.disconnect()
+  }
+
+}
+
+export const remove = async (id:string):Promise<IArticulo | null> => {
+  
+  if (!mongoose.isValidObjectId(id)) {
+    return null
+  }
+
+  try {
+    await db.connect()
+    const articulo = await ArticuloModel.findByIdAndRemove(id).lean()
+    return articulo
+  } finally {
+    await db.disconnect()
+  }
+  
+
+}

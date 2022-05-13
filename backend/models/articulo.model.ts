@@ -12,7 +12,7 @@ type IArticuloTipo = 'video' | 'articulo' | 'otro'
 const schema = new Schema<IArticulo>({
   descripcion: { type: String, required: true },
   enlace: { type: String, required: true },
-  fechaCreacion: { type: Number },
+  fechaCreacion: { type: Number, immutable: true },
   tipo: {
     type: String,
     enum: {
