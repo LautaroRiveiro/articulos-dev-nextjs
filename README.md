@@ -1,16 +1,14 @@
-Tarea:
-Hacer una APP en NextJs
+# CRUD con NextJS
+CRUD para guardar artículos sobre desarrollo web, realizado en Next.Js y MongoDB con el objetivo de practicar principalmente ServerSideProps.
+
+## Tareas
+- App con NextJs
 - Persistencia en MongoDB
 - Usar Mongoose
 - API routes (CRUD)
-- Context + Reducer
-- Una página que cargue todos los items (client side)
+- Una página que cargue todos los items (server side props)
 - Una página individual por items (server side props)
 - Material UI
-
-
-# CRUD con NextJS
-CRUD para guardar artículos sobre desarrollo web, realizado en Next.Js y MongoDB con el objetivo de practicar principalmente ServerSideProps.
 
 ## Tecnologías
 - [Next.js 12](https://nextjs.org/)
