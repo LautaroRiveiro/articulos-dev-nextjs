@@ -1,4 +1,3 @@
-import AddIcon from '@mui/icons-material/Add'
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import EditIcon from '@mui/icons-material/Edit'
@@ -6,16 +5,20 @@ import NewspaperIcon from '@mui/icons-material/Newspaper'
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo'
 import { Fab, IconButton, Link, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
 import type { GetServerSideProps, NextPage } from 'next'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import { articuloService } from '../backend/services'
+import { AddFAB } from '../components/addFab'
 import { Articulo, ArticuloTipo } from '../interfaces'
 import { AppLayout } from '../layouts'
+import { articulosAPI } from '../services'
 
 interface Props {
-  articulos: Articulo[]
+  data: Articulo[]
 }
 
-const HomePage: NextPage<Props> = ({ articulos }) => {
+const HomePage: NextPage<Props> = ({ data }) => {
+
+  const [articulos, setArticulos] = useState<Articulo[]>(data)
 
   const getIcon = (tipo: ArticuloTipo): ReactElement => {
     switch (tipo) {
@@ -23,6 +26,15 @@ const HomePage: NextPage<Props> = ({ articulos }) => {
       case 'otro': return <ChatOutlinedIcon fontSize="small" />
       case 'video': return <OndemandVideoIcon fontSize="small" />
     }
+  }
+
+  const handleDelete = async (id: string) => {
+    await articulosAPI.remove(id)
+    setArticulos(articulos.filter(articulo => articulo._id !== id))
+  }
+
+  const handleAdd = (articulo: Articulo) => {
+    setArticulos([...articulos, articulo])
   }
 
   return (
@@ -51,11 +63,11 @@ const HomePage: NextPage<Props> = ({ articulos }) => {
                     Hace {articulo.fechaCreacion}
                   </Typography>
                 </TableCell>
-                <TableCell align="right" sx={{ minWidth: 40, maxWidth: 40 }}>
+                <TableCell align="right" sx={{ minWidth: 100, maxWidth: 100 }}>
                   <IconButton color="primary" size="small" aria-label="edit">
                     <EditIcon fontSize="inherit" />
                   </IconButton>
-                  <IconButton color="error" size="small" aria-label="delete">
+                  <IconButton color="error" size="small" aria-label="delete" onClick={() => handleDelete(articulo._id)}>
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
                 </TableCell>
@@ -64,9 +76,7 @@ const HomePage: NextPage<Props> = ({ articulos }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Fab color="primary" size="medium" aria-label="add" sx={{right: 0, bottom: 0, position: 'absolute'}}>
-        <AddIcon />
-      </Fab>
+      <AddFAB onAdd={handleAdd} />
     </AppLayout>
   )
 }
@@ -77,7 +87,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
   return {
     props: {
-      articulos: JSON.parse(JSON.stringify(articulos))
+      data: JSON.parse(JSON.stringify(articulos))
     }
   }
 }

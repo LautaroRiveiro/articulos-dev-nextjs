@@ -1,0 +1,1 @@
+export * as articulosAPI from './articulos'
