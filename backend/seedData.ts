@@ -1,6 +1,6 @@
 import { ArticuloModel, IArticulo } from "./models"
 
-const seedData: IArticulo[] = [
+const seedData: Omit<IArticulo, '_id'>[] = [
   {
     descripcion: 'Generador de grid online',
     enlace: 'https://cssgrid-generator.netlify.app/',

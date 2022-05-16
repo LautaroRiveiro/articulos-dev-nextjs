@@ -1,1 +1,1 @@
-export * from './Articulo'
+export * from './articulo'
