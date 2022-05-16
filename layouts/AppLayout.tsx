@@ -1,5 +1,6 @@
 import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
 import Head from 'next/head'
+import Link from 'next/link';
 import { FC, PropsWithChildren } from 'react'
 
 interface Props {
@@ -15,20 +16,23 @@ export const AppLayout: FC<PropsWithChildren<Props>> = ({ title = 'Artículos we
 
       <AppBar position="static" elevation={0} color='primary'>
         <Toolbar>
-          <Typography
-            variant="h6"
-            component="div"
-            color="inherit"
-            noWrap
-            sx={{
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.1rem',
-              textDecoration: 'none',
-            }}
-          >
-            Artículos Web
-          </Typography>
+          <Link href='/' passHref>
+            <Typography
+              variant="h6"
+              component="div"
+              color="inherit"
+              noWrap
+              sx={{
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.1rem',
+                textDecoration: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              Artículos Web
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
 

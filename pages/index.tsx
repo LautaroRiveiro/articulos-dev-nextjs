@@ -1,11 +1,12 @@
+import type { GetServerSideProps, NextPage } from 'next'
+import NextLink from 'next/link'
+import { ReactElement, useState } from 'react'
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import EditIcon from '@mui/icons-material/Edit'
 import NewspaperIcon from '@mui/icons-material/Newspaper'
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo'
 import { Fab, IconButton, Link, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
-import type { GetServerSideProps, NextPage } from 'next'
-import { ReactElement, useState } from 'react'
 import { articuloService } from '../backend/services'
 import { AddFAB } from '../components/addFab'
 import { Articulo, ArticuloTipo } from '../interfaces'
@@ -64,9 +65,11 @@ const HomePage: NextPage<Props> = ({ data }) => {
                   </Typography>
                 </TableCell>
                 <TableCell align="right" sx={{ minWidth: 100, maxWidth: 100 }}>
-                  <IconButton color="primary" size="small" aria-label="edit">
-                    <EditIcon fontSize="inherit" />
-                  </IconButton>
+                  <NextLink href={`/articulo/${articulo._id}`} passHref>
+                    <IconButton color="primary" size="small" aria-label="edit">
+                      <EditIcon fontSize="inherit" />
+                    </IconButton>
+                  </NextLink>
                   <IconButton color="error" size="small" aria-label="delete" onClick={() => handleDelete(articulo._id)}>
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>

@@ -13,3 +13,8 @@ export const create = async (articulo: Partial<Articulo>): Promise<Articulo> => 
   const { data } = await api.post<Articulo>('/articulos', articulo)
   return data
 }
+
+export const update = async (articulo:Articulo): Promise<Articulo> => {
+  const { data } = await api.put('/articulos/' + articulo._id, articulo)
+  return data
+}
