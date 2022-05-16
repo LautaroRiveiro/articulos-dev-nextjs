@@ -12,6 +12,8 @@ import { AddFAB } from '../components/addFab'
 import { Articulo, ArticuloTipo } from '../interfaces'
 import { AppLayout } from '../layouts'
 import { articulosAPI } from '../services'
+import { formatDistanceToNow } from 'date-fns'
+import { es } from 'date-fns/locale'
 
 interface Props {
   data: Articulo[]
@@ -61,7 +63,7 @@ const HomePage: NextPage<Props> = ({ data }) => {
                 </TableCell>
                 <TableCell align="right">
                   <Typography variant="caption" sx={{ color: 'darkgray' }}>
-                    Hace {articulo.fechaCreacion}
+                    {formatDistanceToNow(articulo.fechaCreacion, { locale: es, addSuffix: true })}
                   </Typography>
                 </TableCell>
                 <TableCell align="right" sx={{ minWidth: 100, maxWidth: 100 }}>
